@@ -1,45 +1,43 @@
-<?php
+<?php 
+
+
 
 /**
- * @author Bankole Emmanuel(the wp guy)
+ * @author Bankole Emmanuel
  */
 class DB
 {
-	# Method in php
-
 	protected $host;
 
-	protected $dbName;
+	private $dbName;
 
-	protected $user;
+	private $user;
 
-	protected $password;
+	private $pass;
 
 
-	public function __construct()
-	{
+	public function __construct() {
 		$this->host = 'localhost';
 
 		$this->dbName = 'php_tutorials';
 
 		$this->user = 'root';
 
-		$this->password = '';
+		$this->pass = '';
 	}
 
 	public function connect() {
-		$con = mysqli_connect($this->host, $this->user, $this->password, $this->dbName);
+		try {
+			$con = mysqli_connect($this->host, $this->user, $this->pass, $this->dbName);
 
-			if (!$con) {
-				die("Unable to connect to the database.");
-			} else {
-				return $con;
-			}
-		
+			return $con;
+
+		} catch (Exception $e) {
+			return exit($e->getMessage());
+		}
 	}
 }
 
-// $db = new DB;
+// $db  = new DB;
 
 // print_r($db->connect());
-
